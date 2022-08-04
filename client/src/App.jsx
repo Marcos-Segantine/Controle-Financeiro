@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from "react";
-
-import api from "./services/api";
-
+import { useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 
 import Amount from "./components/Amount";
-import Product from "./components/Product";
+import ListProduct from "./components/ListProduct";
+import api from "./services/api";
 
 function App() {
-  const [product, setProduct] = useState();
+
+    const [data, setData] = useState()
 
   useEffect(() => {
-    api
-      .get("/products")
-      .then((response) => {
-        setProduct(response.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+    api.get('/products')
+        .then(response => setData(response.data))
+  }, [])
 
   return (
     <div id="app" className="App">
       <Amount />
-
-      <div id="listProduct" className="product--list">{!product ? (
-        <p>Loading...</p>
-      ) : (
-        product.map((data) => <Product key={data.id} id={data.id} data={data} />)
-      )}</div>
+      <ListProduct />
     </div>
   );
 }

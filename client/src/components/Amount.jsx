@@ -16,10 +16,8 @@ export default function Amount() {
         price: priceProduct.value,
         about: aboutProduct.value
       })
-      .then((response) => {
-        console.log("POST EFETUADO");
-      })
-      .catch((error) => console.log(error));
+
+    window.location.reload()
   }
 
   return (

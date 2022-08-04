@@ -7,6 +7,9 @@ export default function Products(props) {
     api.delete(`/product/delete/${e.target.id}`).then((response) => {
       console.log(response);
     });
+
+    window.location.reload()
+
   }
 
   return (
