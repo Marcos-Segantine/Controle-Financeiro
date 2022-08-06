@@ -1,23 +1,71 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 import api from "../services/api";
 
 import "./CSS/Amount.css";
 
 export default function Amount() {
+  const [amount, setAmount] = useState([]); 
+
+  useEffect(() => {
+    api.get("/get-receita-despesa").then(({data}) => {
+      setAmount(data);
+    });
+  }, []);
+
   function postData() {
     const nameProduct = document.querySelector("#nameProduct");
     const priceProduct = document.querySelector("#priceProduct");
-    const aboutProduct = document.querySelector('#aboutProduct');
+    const aboutProduct = document.querySelector("#aboutProduct");
 
-    api
-      .post("/post-product", {
-        name: nameProduct.value,
-        price: priceProduct.value,
-        about: aboutProduct.value
-      })
+    api.post("/post-product", {
+      name: nameProduct.value,
+      price: priceProduct.value,
+      about: aboutProduct.value,
+    });
 
-    window.location.reload()
+    window.location.reload();
+  }
+
+  function updateReceita() {
+    const receitaUpdate = document.querySelector("#receitaUpdate");
+
+    api.put("/update-receita", {
+      receita: receitaUpdate.value,
+    });
+
+    window.location.reload();
+  }
+
+  function postReceita() {
+    const receitaPost = document.querySelector("#receitaPost");
+
+    api.post("/post-receita", {
+      receita: receitaPost.value,
+    });
+
+    window.location.reload();
+  }
+
+  function updateDespesa() {
+    const despesa = document.querySelector("#updateDespesa");
+
+    api.put("/update-despesa", {
+      despesa: despesa.value,
+    });
+
+    window.location.reload();
+  }
+
+  function postDespesa() {
+    const despesa = document.querySelector("#postDespesa");
+    api.post("/post-despesa", {
+      despesa: despesa.value,
+    });
+
+    window.location.reload();
   }
 
   return (
@@ -25,60 +73,107 @@ export default function Amount() {
       <h4>Saldo atual</h4>
 
       <h1 id="balance" className="balance">
-        R$ 0.00
+        R$ {(!amount) ? <p>loading...</p> : amount.map(data => data.receita - data.despesa)}
       </h1>
 
       <div className="inc-exp-container">
         <div>
           <h4>Receitas</h4>
           <p id="money-plus" className="money plus">
-            + R$0.00
+            + R$ {(!amount) ? <p>loading...</p> : amount.map(data => data.receita)}
           </p>
         </div>
 
         <div>
           <h4>Despesas</h4>
-          <p id="money-minus" className="money negativo">
-            - R$0.00
+          <p id="money-minus" className="money minus">
+            - R$ {(!amount) ? <p>loading...</p> : amount.map(data => data.despesa)}
           </p>
         </div>
       </div>
 
-      <h3>Transações</h3>
+      <div className="amount">
+        <div className="lista-desejos">
+          <h3>Adicionar produto/serviço a comprar</h3>
 
-      <ul id="transactions" className="transactions">
-        <li className="minus">
-          Salário <span>-$400</span>
-          <button className="delete-btn">x</button>
-        </li>
-      </ul>
+          <form id="form">
+            <div className="form-control">
+              <input
+                id="nameProduct"
+                type="text"
+                placeholder="Nome do produto"
+              />
 
-      <h3>Lista de desejos</h3>
+              <input
+                id="priceProduct"
+                type="number"
+                placeholder="Valor do produto"
+              />
 
-      <form id="form">
-        <div className="form-control">
-          <label>Nome</label>
-          <input id="nameProduct" type="text" placeholder="Nome do produto" />
+              <input
+                id="aboutProduct"
+                type="text"
+                placeholder="Descrição do produto"
+              />
+            </div>
+
+            <div className="btn" onClick={postData}>
+              Adicionar
+            </div>
+          </form>
         </div>
 
-        <div className="form-control">
-          <input
-            id="priceProduct"
-            type="number"
-            placeholder="Valor do produto"
-          />
+        <div className="renda-despesas">
+          <h3>Receitas</h3>
+          <form id="form">
+            <div className="form-control">
+              <input
+                id="receitaUpdate"
+                type="number"
+                placeholder="Atualizar receita"
+              />
+            </div>
+            <div className="btn" onClick={updateReceita}>
+              Adicionar
+            </div>
 
-          <input
-            id="aboutProduct"
-            type="text"
-            placeholder="Descrição do produto"
-          />
-        </div>
+            <div className="form-control">
+              <input
+                id="receitaPost"
+                type="number"
+                placeholder="Acrescentar receita"
+              />
+            </div>
+            <div className="btn" onClick={postReceita}>
+              Adicionar
+            </div>
+          </form>
 
-        <div className="btn" onClick={postData}>
-          Adicionar
+          <h3>Despesas</h3>
+          <form id="form">
+            <div className="form-control">
+              <input
+                id="updateDespesa"
+                type="number"
+                placeholder="Atualizar despesa"
+              />
+            </div>
+            <div className="btn" onClick={updateDespesa}>
+              Atualizar
+            </div>
+            <div className="form-control">
+              <input
+                id="postDespesa"
+                type="number"
+                placeholder="Adicionar despesa"
+              />
+            </div>
+            <div className="btn" onClick={postDespesa}>
+              Adicionar
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

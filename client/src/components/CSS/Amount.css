@@ -1,5 +1,5 @@
 .container {
-  width: 350px;
+  height: max-content;
 }
 
 h1 {
@@ -127,4 +127,17 @@ input[type="number"] {
 
 .transactions li:hover .delete-btn {
   opacity: 1;
+}
+
+.amount {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lista-desejos {
+
+}
+
+.renda-despesas {
+
 }
