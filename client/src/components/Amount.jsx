@@ -3,91 +3,50 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import api from "../services/api";
+import updateReceita from "../services/update-receita";
+import postReceita from "../services/post-receita";
+import updateDespesa from "../services/update-despesa";
+import postDespesa from "../services/post-despesas";
+import postProduto from "../services/post-produto";
 
 import "./CSS/Amount.css";
 
 export default function Amount() {
-  const [amount, setAmount] = useState([]); 
+  const [amount, setAmount] = useState([]);
 
   useEffect(() => {
-    api.get("/get-receita-despesa").then(({data}) => {
+    api.get("/get-receita-despesa").then(({ data }) => {
       setAmount(data);
     });
   }, []);
-
-  function postData() {
-    const nameProduct = document.querySelector("#nameProduct");
-    const priceProduct = document.querySelector("#priceProduct");
-    const aboutProduct = document.querySelector("#aboutProduct");
-
-    api.post("/post-product", {
-      name: nameProduct.value,
-      price: priceProduct.value,
-      about: aboutProduct.value,
-    });
-
-    window.location.reload();
-  }
-
-  function updateReceita() {
-    const receitaUpdate = document.querySelector("#receitaUpdate");
-
-    api.put("/update-receita", {
-      receita: receitaUpdate.value,
-    });
-
-    window.location.reload();
-  }
-
-  function postReceita() {
-    const receitaPost = document.querySelector("#receitaPost");
-
-    api.post("/post-receita", {
-      receita: receitaPost.value,
-    });
-
-    window.location.reload();
-  }
-
-  function updateDespesa() {
-    const despesa = document.querySelector("#updateDespesa");
-
-    api.put("/update-despesa", {
-      despesa: despesa.value,
-    });
-
-    window.location.reload();
-  }
-
-  function postDespesa() {
-    const despesa = document.querySelector("#postDespesa");
-    api.post("/post-despesa", {
-      despesa: despesa.value,
-    });
-
-    window.location.reload();
-  }
 
   return (
     <div className="container">
       <h4>Saldo atual</h4>
 
       <h1 id="balance" className="balance">
-        R$ {(!amount) ? <p>loading...</p> : amount.map(data => data.receita - data.despesa)}
+        R${" "}
+        {!amount ? (
+          <p>loading...</p>
+        ) : (
+          amount.map((data) => data.receita - data.despesa)
+        )}
       </h1>
 
       <div className="inc-exp-container">
         <div>
           <h4>Receitas</h4>
           <p id="money-plus" className="money plus">
-            + R$ {(!amount) ? <p>loading...</p> : amount.map(data => data.receita)}
+            + R${" "}
+            {!amount ? <p>loading...</p> : amount.map((data) => data.receita)}
           </p>
         </div>
 
         <div>
           <h4>Despesas</h4>
           <p id="money-minus" className="money minus">
-            - R$ {(!amount) ? <p>loading...</p> : amount.map(data => data.despesa)}
+            - R${" "}
+            {!amount ? <p>loading...</p> : amount.map((data) => data.despesa)}
           </p>
         </div>
       </div>
@@ -117,7 +76,7 @@ export default function Amount() {
               />
             </div>
 
-            <div className="btn" onClick={postData}>
+            <div className="btn" onClick={postProduto}>
               Adicionar
             </div>
           </form>
