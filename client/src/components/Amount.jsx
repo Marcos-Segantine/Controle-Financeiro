@@ -104,7 +104,7 @@ export default function Amount() {
         </div>
 
         <div className="form-produto">
-          <h3>Adicionar produto ou serviço à comprar</h3>
+          <h3>Adicionar produto ou serviço que quero comprar</h3>
 
           <form id="form">
             <div className="form-control">

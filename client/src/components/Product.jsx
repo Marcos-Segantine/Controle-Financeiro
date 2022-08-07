@@ -15,8 +15,8 @@ export default function Products(props) {
   return (
     <div className="products">
       <p className="product--name">{props.data.name_product}</p>
-      <p className="product--name">R$ {props.data.price_product}</p>
-      <p className="product--name">{props.data.about_product}</p>
+      <p className="product--price">R$ {props.data.price_product}</p>
+      <p className="product--about">{props.data.about_product}</p>
       <span id={props.id} className="delete--item" onClick={deleteProduct}>
         X
       </span>

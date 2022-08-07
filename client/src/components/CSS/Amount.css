@@ -72,9 +72,6 @@ input[type="number"] {
   outline: 0;
 }
 
-.form-produto {
-}
-
 .renda-despesas {
   display: flex;
   justify-content: space-between;
