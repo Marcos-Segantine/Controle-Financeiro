@@ -52,8 +52,59 @@ export default function Amount() {
       </div>
 
       <div className="amount">
-        <div className="lista-desejos">
-          <h3>Adicionar produto/serviço a comprar</h3>
+        <div className="renda-despesas">
+          <form id="form">
+            <h3>Receitas</h3>
+            <div className="form-control">
+              <input
+                id="receitaUpdate"
+                type="number"
+                placeholder="Atualizar receita"
+              />
+            </div>
+            <div className="btn" onClick={updateReceita}>
+              Adicionar
+            </div>
+
+            <div className="form-control">
+              <input
+                id="receitaPost"
+                type="number"
+                placeholder="Acrescentar receita"
+              />
+            </div>
+            <div className="btn" onClick={postReceita}>
+              Adicionar
+            </div>
+          </form>
+
+          <form id="form">
+            <h3>Despesas</h3>
+            <div className="form-control">
+              <input
+                id="updateDespesa"
+                type="number"
+                placeholder="Atualizar despesa"
+              />
+            </div>
+            <div className="btn" onClick={updateDespesa}>
+              Atualizar
+            </div>
+            <div className="form-control">
+              <input
+                id="postDespesa"
+                type="number"
+                placeholder="Adicionar despesa"
+              />
+            </div>
+            <div className="btn" onClick={postDespesa}>
+              Adicionar
+            </div>
+          </form>
+        </div>
+
+        <div className="form-produto">
+          <h3>Adicionar produto ou serviço à comprar</h3>
 
           <form id="form">
             <div className="form-control">
@@ -82,56 +133,7 @@ export default function Amount() {
           </form>
         </div>
 
-        <div className="renda-despesas">
-          <h3>Receitas</h3>
-          <form id="form">
-            <div className="form-control">
-              <input
-                id="receitaUpdate"
-                type="number"
-                placeholder="Atualizar receita"
-              />
-            </div>
-            <div className="btn" onClick={updateReceita}>
-              Adicionar
-            </div>
 
-            <div className="form-control">
-              <input
-                id="receitaPost"
-                type="number"
-                placeholder="Acrescentar receita"
-              />
-            </div>
-            <div className="btn" onClick={postReceita}>
-              Adicionar
-            </div>
-          </form>
-
-          <h3>Despesas</h3>
-          <form id="form">
-            <div className="form-control">
-              <input
-                id="updateDespesa"
-                type="number"
-                placeholder="Atualizar despesa"
-              />
-            </div>
-            <div className="btn" onClick={updateDespesa}>
-              Atualizar
-            </div>
-            <div className="form-control">
-              <input
-                id="postDespesa"
-                type="number"
-                placeholder="Adicionar despesa"
-              />
-            </div>
-            <div className="btn" onClick={postDespesa}>
-              Adicionar
-            </div>
-          </form>
-        </div>
       </div>
     </div>
   );
