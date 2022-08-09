@@ -55,16 +55,6 @@ export default function Amount() {
         <div className="renda-despesas">
           <form id="form">
             <h3>Receitas</h3>
-            <div className="form-control">
-              <input
-                id="receitaUpdate"
-                type="number"
-                placeholder="Atualizar receita"
-              />
-            </div>
-            <div className="btn" onClick={updateReceita}>
-              Adicionar
-            </div>
 
             <div className="form-control">
               <input
@@ -76,20 +66,21 @@ export default function Amount() {
             <div className="btn" onClick={postReceita}>
               Adicionar
             </div>
+            <div className="form-control">
+              <input
+                id="receitaUpdate"
+                type="number"
+                placeholder="Atualizar receita"
+              />
+            </div>
+            <div className="btn" onClick={updateReceita}>
+              Adicionar
+            </div>
           </form>
 
           <form id="form">
             <h3>Despesas</h3>
-            <div className="form-control">
-              <input
-                id="updateDespesa"
-                type="number"
-                placeholder="Atualizar despesa"
-              />
-            </div>
-            <div className="btn" onClick={updateDespesa}>
-              Atualizar
-            </div>
+
             <div className="form-control">
               <input
                 id="postDespesa"
@@ -99,6 +90,16 @@ export default function Amount() {
             </div>
             <div className="btn" onClick={postDespesa}>
               Adicionar
+            </div>
+            <div className="form-control">
+              <input
+                id="updateDespesa"
+                type="number"
+                placeholder="Atualizar despesa"
+              />
+            </div>
+            <div className="btn" onClick={updateDespesa}>
+              Atualizar
             </div>
           </form>
         </div>
@@ -132,8 +133,6 @@ export default function Amount() {
             </div>
           </form>
         </div>
-
-
       </div>
     </div>
   );

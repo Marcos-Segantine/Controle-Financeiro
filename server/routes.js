@@ -16,6 +16,18 @@ route.get("/products", (req, res) => {
   });
 });
 
+route.get("/get-checklist-receita", (req, res) => {
+  db.query("SELECT * FROM receita_futura", (error, result) => {
+    res.send(result);
+  });
+});
+
+route.get("/get-checklist-despesa", (req, res) => {
+  db.query("SELECT * FROM despesa_futura", (error, result) => {
+    res.send(result);
+  });
+});
+
 route.post("/post-product", (req, res) => {
   db.query(
     `INSERT INTO api(name_product, price_product, about_product) VALUES ('${req.body.name}', ${req.body.price}, '${req.body.about}')`
@@ -31,6 +43,18 @@ route.post("/post-receita", (req, res) => {
   });
 });
 
+route.post("/receita-futura", (req, res) => {
+  db.query(
+    `INSERT INTO receita_futura(is_done, title) VALUES(${req.body.is_done}, '${req.body.title}')`
+  );
+});
+
+route.post("/despesa-futura", (req, res) => {
+  db.query(
+    `INSERT INTO despesa_futura(is_done, title) VALUES(${req.body.is_done}, '${req.body.title}')`
+  );
+});
+
 route.put("/update-receita", (req, res) => {
   db.query(`UPDATE receitas_despesas SET receita=${+req.body.receita}`);
 });
@@ -38,6 +62,10 @@ route.put("/update-receita", (req, res) => {
 route.put("/update-despesa", (req, res) => {
   db.query(`UPDATE receitas_despesas SET despesa=${+req.body.despesa}`);
 });
+
+route.put("/change-checked", (req, res) => {
+  db.query()
+})
 
 route.post("/post-despesa", (req, res) => {
   let totalDespesa = +req.body.despesa;

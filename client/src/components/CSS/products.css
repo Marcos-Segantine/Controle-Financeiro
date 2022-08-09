@@ -1,7 +1,7 @@
 .products {
   display: block;
   background-color: #9c88ff80;
-  width: 80%;
+  width: 90%;
   padding: 0.5rem 0.5rem;
   border-radius: 10px;
   margin: 1rem 0;
@@ -13,6 +13,10 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+.product--name {
+  font-style: italic;
 }
 
 .product--price {

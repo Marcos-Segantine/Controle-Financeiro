@@ -1,4 +1,5 @@
 import api from "../services/api";
+import mostraListProduct from "../services/mostraProductList";
 
 import Product from "./Product";
 
@@ -9,24 +10,22 @@ import { useState, useEffect } from "react";
 export default function ListProduct() {
   const [product, setProduct] = useState([]);
 
+  let totalAmount = 0;
+
   useEffect(() => {
     api.get("/products").then((res) => setProduct(res.data));
   }, [product.length]);
 
-  function mostraListProduct() {
-    const listProduct = document.querySelector('#listProduct')
-
-    if (listProduct.className === 'product--list') {
-      listProduct.classList.add('product--list-display')
-    }else {
-      listProduct.classList.remove('product--list-display')
+  (() => {
+    for (let i in product) {
+    totalAmount += product[i].price_product;
     }
-
-  }
+  })();
 
   return (
     <>
       <div id="listProduct" className="product--list">
+        <h3>Produtos ou serviços à comprar</h3>
         {!product ? (
           <p>LOADING..</p>
         ) : (
@@ -34,9 +33,16 @@ export default function ListProduct() {
             <Product data={data} key={data.id} id={data.id} />
           ))
         )}
+        <p className="totalAmount">Total: <span>R$ {totalAmount}</span></p>
       </div>
 
-      <button id="btnDisplayList" className="product-list-mobile--btn" onClick={mostraListProduct}>VER LISTA</button>
+      <button
+        id="btnDisplayList"
+        className="product-list-mobile--btn"
+        onClick={mostraListProduct}
+      >
+        VER LISTA
+      </button>
     </>
   );
 }
