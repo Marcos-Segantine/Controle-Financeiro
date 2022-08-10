@@ -1,0 +1,21 @@
+.annotation{
+    width: 30%;
+    height: 70%;
+}
+
+.annotation-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px;
+    margin: .5em 0;
+    padding: .5em;
+}
+
+.annotation-div p {
+    margin: 0;
+}
+
+.annotation-div span{
+    cursor: pointer;
+}
